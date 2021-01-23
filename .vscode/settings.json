@@ -54,7 +54,8 @@
         "regex": "cpp",
         "forward_list": "cpp",
         "set": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "thread": "cpp"
     },
     "cSpell.language": "en-GB",
     "cSpell.enableFiletypes": [
