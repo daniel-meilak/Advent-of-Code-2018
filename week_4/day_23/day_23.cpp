@@ -6,6 +6,7 @@
 #include<limits>
 #include<cstdlib>
 #include<utility>
+#include<queue>
 #include"../../Utils/utils.h"
 
 // function to compare nth element in vec of vec
@@ -20,16 +21,39 @@ struct sort_by_sr{
     }
 };
 
+// pack bounding box properties together
+struct box_prop{
+    int nanobots;
+    long long lattice_size;
+    long long dist_to_orig;
+    std::vector<long long> box_coord;
 
-bool sort_by_prox(const std::pair<std::vector<double>,int> &lhs, const std::pair<std::vector<double>,int> &rhs){
-    if (lhs.second==rhs.second){ return lhs.first[3]<rhs.first[3]; }
-    else {return lhs.second > rhs.second; }
-}
+    box_prop(int nano, long long lat, long long dist, std::vector<long long> coord){
+        nanobots     = nano;
+        lattice_size = lat;
+        dist_to_orig = dist;
+        box_coord    = coord;
+    }
+};
+
+// sorting func for bounding boxes (for prio queues, whick sort by >)
+// sorts by contained bots -> box size -> distance to origin
+struct box_sort{
+    bool operator()(const box_prop &lhs, const box_prop &rhs){
+        if (lhs.nanobots==rhs.nanobots){
+            if (lhs.lattice_size==rhs.lattice_size){
+                return lhs.dist_to_orig > rhs.dist_to_orig;
+            }
+            else { return lhs.lattice_size < rhs.lattice_size; }
+        }
+        else { return lhs.nanobots < rhs.nanobots; }
+    }
+};
 
 // forward function declarations
 int part1(const std::vector<std::vector<long long>> &input);
 int part2(const std::vector<std::vector<long long>> &input);
-std::vector<std::vector<double>> to_double(const std::vector<std::vector<long long>> &input);
+int nano_in_box(const std::vector<std::vector<long long>> &input, const std::vector<long long> &box);
 
 int main(){
 
@@ -65,126 +89,93 @@ int part1(const std::vector<std::vector<long long>> &input){
 
 int part2(const std::vector<std::vector<long long>> &input){
 
-    // vector for min max in x,y,z directions
-    std::vector<double> min(3,std::numeric_limits<double>::max()), max(3,std::numeric_limits<double>::min());
+    std::vector<long long> best_coord(3);
+
+    // create uniform box, lattice size multiple of 2, contaigning all points
+    // find max coord in input
+    long long bound = 0;
+    for (const auto &line : input){
+        for (int i=0; i<3; i++){
+            bound = std::max(bound, std::abs(line[i]));
+        }
+    }
+
+    long long max = 2;
+    while (max < bound){ max*=2; }
+
+    // create bounding box
+    std::vector<long long> box = {-max,-max,-max, max, max, max};
+
+    // initial box
+    box_prop initial(input.size(), 2*max, max, box);
+
+    // priority que of boxes, ordered by contained nanobots -> box size -> box dist to origin
+    // We must keep tack of all boxes as we might divide the current best box and find that it becomes worse
+    // than an older, less optimal box, seen previously
+    std::priority_queue<box_prop, std::vector<box_prop>, box_sort> queue;
     
-    // start by reducing system dimensions by 1m
-    int size_reduce = std::pow(2,28);
+    // 8 octant coods in 3d space
+    std::vector<std::vector<long long>> octants = {{0,0,0},{0,0,1},{0,1,0},{0,1,1},{1,0,0},{1,0,1},{1,1,0},{1,1,1}};
 
-    // find system borders
-    int dim = 3;
-    for (auto line : input){
-        for (int i=0; i<dim; i++){
-            min[i] = std::min(min[i],(double)line[i]);
-            max[i] = std::max(max[i],(double)line[i]);
-        }
-    }
+    queue.push(initial);
 
-    // reduce borders by size_reduce
-    for (int i=0; i<dim; i++){
-        min[i] /= size_reduce;
-        max[i] /= size_reduce;
-    }
-
-    // best pos for each iter
-    std::vector<double> best_pos(3);
-
-    // stop when we find coordinate at full size
-    while (size_reduce!=0){
-
-        // copy of input and distances
-        std::vector<std::vector<double>> copy = to_double(input);
-
-        // reduce system by size_reduce
-        for (auto &line: copy){
-
-            for (auto &coord : line){
-                coord /= size_reduce;
-            }
-        }
-
-        // check each pos in reduced box
-        std::vector<std::pair<std::vector<double>,int>> all_pos;
-        std::vector<double> inc(3);
-        for (int i=0; i<dim; i++){
-            inc[i] = (max[0]-min[0])/5.0;
-        }
-
-        // adjust min and max to help with edge cases
-        for (int i=0; i<dim; i++){
-            min[i] -= inc[i];
-            max[i] += inc[i];
-        }
-
-        for (double x=min[0]; x<=max[0]; x+=inc[0] ){
-            for (double y=min[1]; y<=max[1]; y+=inc[1] ){
-                for (double z=min[2]; z<=max[2]; z+=inc[2] ){
-                    
-                    int count = 0;
-                    // count number of nanobots int range
-                    for (const auto &nano : copy){
-                        if (manhattan_3D(x,y,z,nano[0],nano[1],nano[2])<=nano[3]){
-                            count+=1.0;
-                        }
-                        else {
-                            std::cout << "NOPE" << std::endl;
-                            std::cout << manhattan_3D(x,y,z,nano[0],nano[1],nano[2]) << std::endl;
-                            std::cout << nano[3] << std::endl;
-                            std::cout << std::endl;
-                        }
-                    }
-
-                    if (count > 1){
-                        std::vector<double> pos = {x,y,z,manhattan_3D(x,y,z)};
-
-                        all_pos.push_back({pos,count});
-                    }
-                }
-            }
-        }
-
-        std::cout << 57429458/(double)size_reduce << "  " << 47789543/(double)size_reduce << "  " << 59741497/(double)size_reduce << std::endl;
-
-        // sort all pos by biggest proximity
-        std::sort(all_pos.begin(), all_pos.end(), sort_by_prox);
-        best_pos = all_pos[0].first;
-
-        // resize borders to include all highest proximity points
-        int highest = all_pos[0].second;
-        // reset min and max
-        std::fill(min.begin(), min.end(), std::numeric_limits<double>::max());
-        std::fill(max.begin(), max.end(), std::numeric_limits<double>::min());
-        for (const auto &pair : all_pos){
-            if (pair.second==highest){
-                for (int i=0; i<3; i++){
-                    min[i] = std::min(min[i], 2*(pair.first[i]-1));
-                    max[i] = std::max(max[i], 2*(pair.first[i]+1)); 
-                }
-            }
-        }
+    while (!queue.empty()){
         
-        // halve size reduce
-        size_reduce /= 2;
+        box_prop current = queue.top();
+        queue.pop();
+
+
+        // if current lattice size is 1, found optimal coordinate
+        if (current.lattice_size == 1){
+            for (int i=0; i<3; i++){ best_coord[i] = current.box_coord[i]; }
+            break;
+        } 
+        
+        // reduce box size
+        current.lattice_size /= 2;
+
+        // split current box into octants and push new boxese onto queue
+        for (const auto &octant : octants){
+            std::vector<long long> new_box(6);
+
+            for (int i=0; i<3; i++){
+                new_box[i] = current.box_coord[i]+(current.lattice_size*octant[i]);
+                new_box[i+3] = new_box[i] + current.lattice_size;
+            }
+
+            // find properties of new box
+            int contains     = nano_in_box(input, new_box);
+            int dist_to_orig = manhattan_3D(new_box[0], new_box[1], new_box[2]);
+
+            // construct
+            box_prop next(contains, current.lattice_size, dist_to_orig, new_box);
+
+            // push to queue
+            queue.push(next);
+        }
     }
 
-    // return manhattan distance of best pos
-    return manhattan_3D(best_pos[0], best_pos[1], best_pos[2]);
+    return manhattan_3D(best_coord[0], best_coord[1], best_coord[2]);
 }
 
-// convert 2D vector of int to 2D vector of double
-std::vector<std::vector<double>> to_double(const std::vector<std::vector<long long>> &input){
 
-    int height = input.size();
-    int width  = input[0].size(); 
-    
-    std::vector<std::vector<double>> output(height, std::vector<double>(width));
+// check if nanobot range intersects with box
+int nano_in_box(const std::vector<std::vector<long long>> &input, const std::vector<long long> &box){
 
+    int count = 0;
+    for (const auto &line : input){
+        
+        long long d = 0LL;
 
-    for (int y=0; y<height; y++){
-        for (int x=0; x<width; x++){
-            output[y][x] = (double)input[y][x];
+        for (int i=0; i<3; i++){
+            d += std::abs(line[i]-box[i]) + std::abs(line[i]-(box[i+3]-1));
+            d -= (box[i+3]-1) - box[i];
         }
+
+        d /= 2;
+
+        if (d<=line[3]){ count++; }
     }
 
-    return output;
+    return count;
 }
