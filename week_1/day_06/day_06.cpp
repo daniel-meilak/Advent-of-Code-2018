@@ -43,7 +43,7 @@ int main(){
 
             // find distance from xy to each point in input
             for (int i=0; i<size; i++){
-                dist[i] = manhattan_2D(input[i][0],input[i][1],x,y);
+                dist[i] = manhattan(input[i],{x,y});
             }
 
             // sum all the distances
