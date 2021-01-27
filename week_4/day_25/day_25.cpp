@@ -25,7 +25,7 @@ int main(){
         for (std::vector<std::vector<int>> &con : cons){
 
             for (const std::vector<int> &s : con){
-                if (manhattan_4D(star[0],star[1],star[2],star[3],s[0],s[1],s[2],s[3])<=3){
+                if (manhattan(star,s)<=3){
                     con.push_back(star);
                     put_in_con = true;
                     break;
@@ -57,7 +57,7 @@ int main(){
                     for (auto star_it2=con_it2->begin(); star_it2!=con_it2->end(); star_it2++){
 
                         // if any two stars in the two constellations connect, combine
-                        if (manhattan_4D((*star_it1)[0],(*star_it1)[1],(*star_it1)[2],(*star_it1)[3],(*star_it2)[0],(*star_it2)[1],(*star_it2)[2],(*star_it2)[3])<=3){
+                        if (manhattan((*star_it1),(*star_it2))<=3){
 
                             // add second con to first
                             con_it1->insert(con_it1->end(), con_it2->begin(), con_it2->end());

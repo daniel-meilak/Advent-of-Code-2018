@@ -8,11 +8,10 @@
 //==============================================================================================
 // Struct member functions
 //==============================================================================================
-
 bool distance_func::operator()(const point &lhs, const point &rhs){
    // distances to target point
-   int d1 = manhattan_2D(lhs.x,lhs.y,p.x,p.y);
-   int d2 = manhattan_2D(rhs.x,rhs.y,p.x,p.y);
+   int d1 = manhattan(lhs.x, lhs.y, p.x, p.y);
+   int d2 = manhattan(rhs.x, rhs.y, p.x, p.y);
 
    // if distance is equal, choose most north west point
    if (d1==d2){ return lhs < rhs; }
