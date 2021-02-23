@@ -3,6 +3,7 @@
 #include<string>
 #include<algorithm>
 #include<cstdlib>
+#include<set>
 #include"../../Utils/utils.h"
 
 // forward function declarations
@@ -38,20 +39,21 @@ int part2(const std::vector<int> &input){
     // current frequency
     int freq = 0;
 
-    // history of frequencies
-    std::vector<int> history;
+    // history of frequencies, start with 0
+    std::set<int> history = {0};
+    bool repeat = false;
 
     // work through input
-    const int size = input.size();
-    for (int i=0; i<size; i++){
-        freq += input[i];
+    while(!repeat){
+        for (const int &line : input){
+            freq += line;
 
-        if (std::find(history.begin(), history.end(), freq)!=history.end()){
-            break;
+            if (history.contains(freq)){
+                repeat = true;
+                break;
+            }
+            else { history.insert(freq); }
         }
-
-        history.push_back(freq);
-        if (i==size-1){ i=-1; }
     }
 
     return freq;

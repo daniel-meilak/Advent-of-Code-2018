@@ -26,9 +26,9 @@ int main(){
 
     // compare pairs of words to find correct boxes
     std::string common;
-    const int size = input.size();
-    for (int i=0; i<size; i++){
-        for (int j=i+1; j<size; j++){
+    size_t size = input.size();
+    for (size_t i=0; i<size; i++){
+        for (size_t j=i+1; j<size; j++){
 
             // find common letters in correct boxes
             common = difference(input[i], input[j]);
@@ -69,7 +69,7 @@ void count(const std::string &word, int &two, int &three){
 
 std::string difference(const std::string &word1, const std::string &word2){
 
-    const int size = word1.size();
+    size_t size = word1.size();
 
     // output string
     std::string output;
@@ -78,13 +78,13 @@ std::string difference(const std::string &word1, const std::string &word2){
     int diff = 0;
 
     // compare each letter
-    for (int i=0; i<size; i++){
+    for (size_t i=0; i<size; i++){
         if (word1[i]!=word2[i]){ diff++; }
     }
 
     // if difference is 1 return the common letters
     if (diff==1){
-        for (int i=0; i<size; i++){
+        for (size_t i=0; i<size; i++){
             if (word1[i]==word2[i]){ output.push_back(word1[i]); }
         }
     }

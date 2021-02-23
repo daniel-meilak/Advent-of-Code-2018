@@ -39,7 +39,6 @@ int main(){
     std::unordered_map<char, step> steps;
 
     for (const auto &line : input){
-        
         steps[line[0][0]].required_for += line[1][0];
         steps[line[1][0]].requirements += line[0][0];
     }
@@ -50,9 +49,7 @@ int main(){
 
     // find the starting points
     for (const auto &pair : steps){
-        if (pair.second.requirements.size() == 0){
-            queue.push_back(pair.first);
-        }
+        if (pair.second.requirements.size()==0){ queue.push_back(pair.first); }
     }
 
     // unique steps for BFS and path
