@@ -14,15 +14,15 @@ int main(){
     // read input into vector of strings.
     std::vector<std::string> input = read_input("input", "");
 
-    const int height = input.size()+2;
-    const int width  = input[0].size()+2;
+    size_t height = input.size()+2;
+    size_t width  = input[0].size()+2;
 
     // grid of acres with border
     std::vector<std::string> grid(height, std::string(width,'.'));
 
     // fill grid with input
-    for (int y=0; y<height-2; y++){
-        for (int x=0; x<width-2; x++){
+    for (size_t y=0; y<height-2; y++){
+        for (size_t x=0; x<width-2; x++){
             grid[y+1][x+1] = input[y][x];
         }
     }
@@ -40,8 +40,8 @@ int main(){
     for (int t=0; t<minutes; t++){
         
         // loop through grid
-        for (int y=1; y<height-1; y++){
-            for (int x=1; x<width-1; x++){
+        for (size_t y=1; y<height-1; y++){
+            for (size_t x=1; x<width-1; x++){
                 
                 // neighbours
                 int open   = 0;
@@ -79,8 +79,8 @@ int main(){
     // number of lumber x number of trees in grid
     int tot_trees1  = 0, tot_trees2  = 0;
     int tot_lumber1 = 0, tot_lumber2 = 0;
-    for (int y=1; y<height-1; y++){
-        for (int x=1; x<width-1; x++){
+    for (size_t y=1; y<height-1; y++){
+        for (size_t x=1; x<width-1; x++){
             if (part1[y][x]=='|'){ tot_trees1++; }
             else if (part1[y][x]=='#'){ tot_lumber1++; }
 

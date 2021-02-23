@@ -24,8 +24,8 @@ int main(){
     int count = 0;
 
     // work through samples
-    const int size = samples.size();
-    for (int i=0; i<size; i+=4){
+    size_t size = samples.size();
+    for (size_t i=0; i<size; i+=4){
 
         // set args from samples
         arg = samples[i+1];
@@ -34,8 +34,8 @@ int main(){
         int valid_func = 0;
 
         // try each function
-        int num_func = functions.size();
-        for (int j=0; j<num_func; j++){
+        size_t num_func = functions.size();
+        for (size_t j=0; j<num_func; j++){
 
             // set reg from samples
             reg = samples[i];
@@ -52,9 +52,7 @@ int main(){
                 std::vector<int> &possible = links[unknown_id];
 
                 // if function j has not already been verified, add to possible list
-                if (std::find(possible.begin(), possible.end(), j)==possible.end()){
-                    possible.push_back(j);
-                }
+                if (std::find(possible.begin(), possible.end(), j)==possible.end()){ possible.push_back(j); }
 
                 // increace valid func count
                 valid_func++;

@@ -146,33 +146,6 @@ int main(){
                 // move up
                 y--;              
             }
-
-            // // for viewable output, uncomment this region
-            // std::cout << "    ";
-            // for (int j=x-25; j<x+25; j++){
-            //     if (j>=0 && j<=xmax-xmin){
-            //         std::cout << std::to_string(j)[0];
-            //     }
-            // }
-            // std::cout << "\n    ";
-            // for (int j=x-25; j<x+25; j++){
-            //     if (j>=0 && j<=xmax-xmin){
-            //         std::cout << std::to_string(j)[1];
-            //     }
-            // }
-            // std::cout << std::endl;
-            // for (int i=y-25; i<y+25; i++){
-            //     if (i>=ymin && i<=ymax){ std::cout << std::setfill(' ') << std::setw(4) << i; }
-            //     for (int j=x-25; j<x+25; j++){
-            //         if (i>=ymin && i<=ymax && j>=0 && j<=xmax-xmin){
-            //             std::cout << grid[i][j];
-            //         }
-            //     }
-            //     if (i>=ymin && i<=ymax){ std::cout << std::endl; }
-            // }
-            // std::cout << std::endl;
-
-            // std::this_thread::sleep_for(100ms);
         }
 
         // remove source
@@ -182,12 +155,10 @@ int main(){
     // count water tiles
     int part1 = 0;
     int part2 = 0;
-    for (unsigned int i=ymin_clay; i<grid.size(); i++){
-        for (unsigned int j=0; j<grid[0].size(); j++){
+    for (size_t i=ymin_clay; i<grid.size(); i++){
+        for (size_t j=0; j<grid[0].size(); j++){
             
-            if (grid[i][j]=='|'){
-                part1++;
-            }
+            if (grid[i][j]=='|'){ part1++; }
             else if (grid[i][j]=='~'){
                 part1++;
                 part2++;
