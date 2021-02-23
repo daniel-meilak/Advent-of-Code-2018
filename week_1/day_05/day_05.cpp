@@ -53,13 +53,10 @@ int reduce(std::list<char> reaction){
                 continue;
             }
         }
-        // value at it is lowercase
-        else {
-            // check if next value is uppercase version
-            if (std::toupper(*it)!=*std::next(it)){
-                it++;
-                continue;
-            }
+        // value at it is lowercase, check if next value is uppercase version
+        else if (std::toupper(*it)!=*std::next(it)){
+            it++;
+            continue;
         }
 
         // remove pair

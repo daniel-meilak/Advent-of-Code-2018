@@ -28,12 +28,8 @@ int main(){
 
         const std::string &key = line[3];
 
-        if (key=="Guard"){
-            id = std::stoi(line[4]);
-        }
-        else if (key=="falls"){
-            sleep_start = std::stoi(line[2]);
-        }
+        if      (key=="Guard"){ id          = std::stoi(line[4]); }
+        else if (key=="falls"){ sleep_start = std::stoi(line[2]); }
         else if (key=="wakes"){
             sleep_end = std::stoi(line[2]);
 

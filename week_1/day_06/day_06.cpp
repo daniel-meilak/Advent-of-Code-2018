@@ -5,6 +5,7 @@
 #include<unordered_map>
 #include<utility>
 #include<cstdlib>
+#include<ranges> // C++20
 #include"../../Utils/utils.h"
 
 int main(){
@@ -26,7 +27,7 @@ int main(){
         ymax = std::max(ymax,line[1]);
     }
 
-    const int size = input.size();
+    size_t size = input.size();
 
     // vector of num nearest neighbours to each square
     std::vector<int> num_nearest(size);
@@ -41,14 +42,10 @@ int main(){
             // vector of distances to each point
             std::vector<int> dist(size);
 
-            // find distance from xy to each point in input
-            for (int i=0; i<size; i++){
-                dist[i] = manhattan(input[i],{x,y});
-            }
-
-            // sum all the distances
+            // find distance from xy to each point in input and sum 
             int sum = 0;
-            for (int i=0; i<size; i++){
+            for (size_t i=0; i<size; i++){
+                dist[i] = manhattan(input[i],{x,y});
                 sum += dist[i];
             }
 
@@ -56,13 +53,13 @@ int main(){
             if (sum<10000){ region++; }
 
             // if current square is in input, continue
-            if (std::find(input.begin(), input.end(), std::vector<int>(x,y))!=input.end()){ continue; }
+            if (std::ranges::find(input, std::vector<int>(x,y))!=input.end()){ continue; }
 
             // find min distance
-            auto it_min = std::min_element(dist.begin(), dist.end());
+            auto it_min = std::ranges::min_element(dist);
 
             // check if min distance is repeated, if yes ignore
-            if (std::count(dist.begin(), dist.end(), *it_min) > 1){ continue; }
+            if (std::ranges::count(dist, *it_min) > 1){ continue; }
 
             // add to tally of nearest neighbours
             num_nearest[std::distance(dist.begin(),it_min)]++;
@@ -70,7 +67,7 @@ int main(){
     }
 
     // reduce num_nearest for positions on borders to zero
-    for (int i=0; i<size; i++){
+    for (size_t i=0; i<size; i++){
         if ( input[i][0]==xmin || input[i][0]==xmax || input[i][1]==ymin || input[i][0]==ymax ){ num_nearest[i]=0; }
     }
 
