@@ -47,9 +47,6 @@ int run_instructions(std::vector<int> reg, std::vector<std::vector<std::string>>
         // chose instruction pointed to by ip
         std::vector<std::string> &line = input[*ip];
 
-        // optimization for part 2
-
-
         // run approproate function
         if      (line[0]=="addr"){ func = &addr; }
         else if (line[0]=="addi"){ func = &addi; }

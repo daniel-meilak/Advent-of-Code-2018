@@ -4,8 +4,9 @@
 #include<algorithm>
 #include<cstdlib>
 #include<climits>
-#include"../../Utils/utils.h"
+#include<ranges> // C++20
 #include"game.h"
+#include"../../Utils/utils.h"
 
 // forward function declaration
 int resolve(std::vector<std::string> input, const int elves_attack);
@@ -15,8 +16,8 @@ int main(){
     // read input into vector of strings.
     std::vector<std::string> input = read_input("input", "");
 
-    std::cout << "Answer (part 1):\n"   << resolve(input,3) << std::endl;
-    std::cout << "\nAnswer (part 2):\n" << resolve(input,23) << std::endl;
+    std::cout << "Answer (part 1): " << resolve(input,3) << std::endl;
+    std::cout << "Answer (part 2): " << resolve(input,23) << std::endl;
 
     return 0;
 }
@@ -33,10 +34,10 @@ int resolve(std::vector<std::string> input, const int elves_attack){
     int elves = 0;
 
     // find positions of elves and goblins
-    const int width  = input[0].size();
-    const int height = input.size();
-    for (int x=0; x<width; x++){
-        for (int y=0; y<height; y++){
+    size_t width  = input[0].size();
+    size_t height = input.size();
+    for (size_t x=0; x<width; x++){
+        for (size_t y=0; y<height; y++){
             
             char &c = input[y][x];
 
@@ -64,7 +65,7 @@ int resolve(std::vector<std::string> input, const int elves_attack){
         std::sort(units.begin(), units.end());
 
         // run rounds of movement and combat
-        for (unsigned int i=0; i<units.size(); i++){
+        for (size_t i=0; i<units.size(); i++){
 
             // current unit and iterator to enemy
             unit &u = units[i];
@@ -101,9 +102,7 @@ int resolve(std::vector<std::string> input, const int elves_attack){
                     if (possible_path.size() == path_length){
 
                         // check if first step in new path is higher prio (reading order)
-                        if (possible_path[0]<next){
-                            next = possible_path[0];
-                        }
+                        if (possible_path[0]<next){ next = possible_path[0]; }
                     }
                     // if path length is shorter that current shortest path
                     else if (possible_path.size() < path_length){
@@ -154,9 +153,9 @@ int resolve(std::vector<std::string> input, const int elves_attack){
         leftover_hp += u.hp;
     }
 
-    std::cout << "Started with " << elves << " elves" << std::endl;
-    std::cout << "Units left after combat: " << units.size() << std::endl;
-    std::cout << "Outcome: ";
+    // std::cout << "Started with " << elves << " elves" << std::endl;
+    // std::cout << "Units left after combat: " << units.size() << std::endl;
+    // std::cout << "Outcome: ";
 
     return rounds*leftover_hp;
 }

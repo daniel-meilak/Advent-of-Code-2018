@@ -95,15 +95,11 @@ void run_instructions(std::vector<int> reg, std::vector<std::vector<std::string>
       std::vector<std::string> &line = input[*ip];
 
       // part 1
-      if (*ip == 28 && first==0){ 
-         first = reg[5];
-      }
+      if (*ip == 28 && first==0){ first = reg[5]; }
       
       // part 2
       if (*ip == 28){
-         if (std::find(numbers.begin(), numbers.end(),reg[5])==numbers.end()){
-            numbers.push_back(reg[5]);
-         }
+         if (std::find(numbers.begin(), numbers.end(),reg[5])==numbers.end()){ numbers.push_back(reg[5]); }
          else {
             last = numbers.back();
             break;

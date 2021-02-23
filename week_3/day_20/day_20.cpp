@@ -46,14 +46,12 @@ int main(){
     std::list<std::vector<int>> stack;
 
     // work through each step in regex
-    const int size = input.size()-1;
-    for (int i=1; i<size; i++){
+    size_t size = input.size()-1;
+    for (size_t i=1; i<size; i++){
         char &c = input[i];
 
         // add new path to work through to stack
-        if (c=='('){
-            stack.push_back({dist,x,y});
-        }
+        if (c=='('){ stack.push_back({dist,x,y}); }
         // get back to original path
         else if (c==')'){
             dist = stack.back()[0];
@@ -74,9 +72,7 @@ int main(){
             x += (c=='E') - (c=='W');
             y += (c=='S') - (c=='N');
             dist++;
-            if (grid.find(point(x,y))==grid.end() || dist < grid[point(x,y)]){
-                grid[point(x,y)] = dist;
-            }
+            if (grid.find(point(x,y))==grid.end() || dist < grid[point(x,y)]){ grid[point(x,y)] = dist; }
         }
     }
 
