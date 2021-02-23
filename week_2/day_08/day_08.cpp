@@ -79,9 +79,7 @@ int build_tree(std::vector<node> &tree, const std::vector<int> &input, int &pos)
     else {
         for (const auto &meta : n.metadata){
             int index = meta-1;
-            if (index>=0 && index<n.num_children){
-                n.value += children[index];
-            }
+            if (index>=0 && index<n.num_children){ n.value += children[index]; }
         }
     }
     
