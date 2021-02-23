@@ -12,7 +12,7 @@ long play_marbles(const int &players, const long &marbles);
 int main(){
 
     const long marbles = 72019;
-    const int players = 458;
+    const int  players = 458;
 
     std::cout << "Answer (part 1): " << play_marbles(players,marbles) << std::endl;
     std::cout << "Answer (part 2): " << play_marbles(players,marbles*100) << std::endl;
@@ -44,10 +44,8 @@ long play_marbles(const int &players, const long &marbles){
             it = circle.erase(it_to_remove);
             if (it==circle.end()){ it=circle.begin(); }
         }
-        else {
-            // insert next marble
-            it = circle.insert(next_cyclic(it,2,circle),i);
-        }
+        // insert next marble
+        else { it = circle.insert(next_cyclic(it,2,circle),i); }
     }
 
     // find player with most points

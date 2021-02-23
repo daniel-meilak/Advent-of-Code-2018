@@ -22,8 +22,8 @@ int main(){
     // build map of rules
     std::unordered_map<std::string, char> rules;
 
-    int size = input.size();
-    for (int i=2; i<size; i++){
+    size_t size = input.size();
+    for (size_t i=2; i<size; i++){
         rules[input[i][0]] = input[i][1][0];
     }
 
@@ -44,19 +44,15 @@ int plant_count(const int &generations, std::string plants, const std::string &p
     int count = 0;
 
     // run 20 generations
-    int size = plants.size()-2;
+    size_t size = plants.size()-2;
     for (int i=0; i<generations; i++){
 
         // check each plant position
-        for (int j=0; j<size; j++){
+        for (size_t j=0; j<size; j++){
             std::string sub = copy.substr(j,5);
 
-            if (rules.count(sub)==1){
-                plants[j+2] = rules[sub];
-            }
-            else {
-                plants[j+2] = '.';
-            }
+            if (rules.count(sub)==1){ plants[j+2] = rules[sub]; }
+            else { plants[j+2] = '.'; }
         }
 
         // update copy
@@ -64,7 +60,7 @@ int plant_count(const int &generations, std::string plants, const std::string &p
     }
 
     size = plants.size();
-    for (int i=0; i<size; i++){
+    for (size_t i=0; i<size; i++){
         if (plants[i]=='#'){
             count += i-padding.size();
         }

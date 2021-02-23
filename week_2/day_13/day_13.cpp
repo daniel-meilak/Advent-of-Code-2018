@@ -2,6 +2,7 @@
 #include<vector>
 #include<string>
 #include<algorithm>
+#include<ranges> // C++20
 #include<cstdlib>
 #include"../../Utils/utils.h"
 
@@ -12,11 +13,7 @@ struct cart{
     int dir;
     int step = 0;
 
-    cart(int x, int y, int dir){
-        this->x   = x;
-        this->y   = y;
-        this->dir = dir;
-    }
+    cart(int x, int y, int dir): x(x), y(y), dir(dir){};
 };
 
 bool sort_by_pos(const cart &lhs, const cart &rhs){
@@ -33,10 +30,10 @@ int main(){
     std::vector<cart> carts;
 
     // first find all carts and replace with track
-    const int size_y = input.size();
-    const int size_x = input[0].size();
-    for (int x=0; x<size_x; x++){
-        for (int y=0; y<size_y; y++){
+    size_t size_y = input.size();
+    size_t size_x = input[0].size();
+    for (size_t x=0; x<size_x; x++){
+        for (size_t y=0; y<size_y; y++){
 
             char &c = input[y][x]; 
 
@@ -62,7 +59,7 @@ int main(){
     }
 
     // keep initial cart number
-    unsigned int total_carts = carts.size();
+    size_t total_carts = carts.size();
 
     // collision coordinates
     int col_x=0, col_y=0;
@@ -71,9 +68,9 @@ int main(){
     while(carts.size()>1){
 
         // sort carts from top left to bottom right
-        std::sort(carts.begin(), carts.end(), sort_by_pos);
+        std::ranges::sort(carts, sort_by_pos);
 
-        for (unsigned int j=0; j<carts.size(); j++){
+        for (size_t j=0; j<carts.size(); j++){
             cart &c = carts[j];
 
             // move in current direction
@@ -146,7 +143,7 @@ int main(){
             }
 
             // check for collision
-            for (unsigned int k=0; k<carts.size(); k++){
+            for (size_t k=0; k<carts.size(); k++){
                 // dont compare cart to itself
                 if (k==j){ continue; }
                     
@@ -164,9 +161,7 @@ int main(){
                         carts.erase(carts.begin()+j-1);
                         j--;
                     }
-                    else {
-                        carts.erase(carts.begin()+j);
-                    }
+                    else { carts.erase(carts.begin()+j); }
                     j--;
                     break;
 
