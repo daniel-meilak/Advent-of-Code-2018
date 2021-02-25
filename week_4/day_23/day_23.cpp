@@ -13,10 +13,10 @@
 struct sort_by_sr{
     int col;
 
-    sort_by_sr(int col_): col(col_){};
+    sort_by_sr(int col): col(col){};
 
     bool operator()(const std::vector<long long> &lhs, const std::vector<long long> &rhs){
-        if (lhs[col]==rhs[col]){ return manhattan_3D(lhs[0],lhs[1],lhs[2]) < manhattan_3D(rhs[0],rhs[1],rhs[2]); }
+        if (lhs[col]==rhs[col]){ return manhattan(lhs) < manhattan(rhs); }
         else {return lhs[col] < rhs[col]; }
     }
 };
@@ -61,8 +61,6 @@ int main(){
     std::vector<std::string> delimiters = {",","pos=<"," ",">","r="};
     std::vector<std::vector<long long>> input = input_to_llint_2D(read_input_2D("input", delimiters));
 
-    
-
     std::cout << "Answer (part 1): " << part1(input) << std::endl;
     std::cout << "Answer (part 2): " << part2(input) << std::endl;
 
@@ -81,7 +79,10 @@ int part1(const std::vector<std::vector<long long>> &input){
     int count = 0;
     for (const std::vector<long long> &nano : input){
 
-        if (manhattan_3D(nano[0],nano[1],nano[2],(*it)[0],(*it)[1],(*it)[2]) <= highest_radius){ count++; }       
+        std::vector<long long> bot1(nano.begin(),nano.begin()+3);
+        std::vector<long long> bot2(it->begin(), it->begin()+3);
+
+        if (manhattan(bot1,bot2) <= highest_radius){ count++; }       
     }
 
     return count;
@@ -145,7 +146,7 @@ int part2(const std::vector<std::vector<long long>> &input){
 
             // find properties of new box
             int contains     = nano_in_box(input, new_box);
-            int dist_to_orig = manhattan_3D(new_box[0], new_box[1], new_box[2]);
+            int dist_to_orig = manhattan(new_box);
 
             // construct
             box_prop next(contains, current.lattice_size, dist_to_orig, new_box);
@@ -155,7 +156,7 @@ int part2(const std::vector<std::vector<long long>> &input){
         }
     }
 
-    return manhattan_3D(best_coord[0], best_coord[1], best_coord[2]);
+    return manhattan(best_coord);
 }
 
 

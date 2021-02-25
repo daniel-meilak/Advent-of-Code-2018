@@ -69,21 +69,13 @@ int main(){
             int geo_index;
 
             // origin and target have geological index of 0
-            if ( (x==0 && y==0)|| (x==target_x && y==target_y) ){
-                geo_index = 0;
-            }
+            if ( (x==0 && y==0)|| (x==target_x && y==target_y) ){ geo_index = 0; }
             // top border
-            else if (y==0){
-                geo_index = x*16807;
-            }
+            else if (y==0){ geo_index = x*16807; }
             // left border
-            else if (x==0){
-                geo_index = y*48271;
-            }
+            else if (x==0){ geo_index = y*48271; }
             // all other squares
-            else {
-                geo_index = erosion_levels[y][x-1]*erosion_levels[y-1][x];
-            }
+            else { geo_index = erosion_levels[y][x-1]*erosion_levels[y-1][x]; }
 
             // find erosion level
             erosion_levels[y][x] = (geo_index + depth) % 20183;
@@ -160,8 +152,8 @@ std::string hasher(const point &p){
 std::vector<point> find_neighbours(const point &p, const std::vector<std::vector<char>> &grid){
 
     // graph height and width
-    const int height = grid.size();
-    const int width  = grid[0].size(); 
+    size_t height = grid.size();
+    size_t width  = grid[0].size(); 
 
     // Right, Left, South, North neighbours
     std::vector<point> directions = {point(1,0), point(-1,0), point(0,1), point(0,-1)};
@@ -174,7 +166,7 @@ std::vector<point> find_neighbours(const point &p, const std::vector<std::vector
         point n = p + dir;
 
         // must be a valid position
-        if (n.x>=0 && n.y>=0 && n.x<width && n.y<height){
+        if (n.x>=0 && n.y>=0 && n.x<(int)width && n.y<(int)height){
 
             // if rocky, can use climbing gear 'G' or torch 'T'
             if (grid[n.y][n.x]=='.'){
@@ -225,11 +217,7 @@ std::vector<point> find_neighbours(const point &p, const std::vector<std::vector
 int find_cost(const point &start, const point &end){
     
     // if no change of tool needed
-    if (start.tool==end.tool){
-        return 1;
-    }
+    if (start.tool==end.tool){ return 1; }
     // if change of tool is needed
-    else {
-        return 8;
-    }
+    else { return 8; }
 }
