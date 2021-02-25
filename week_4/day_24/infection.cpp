@@ -45,12 +45,6 @@ void target_selection(std::vector<army_t> &units){
    // sort into target selection order
    std::sort(units.begin(), units.end(), selection_order);
 
-   // std::cout << "Target Selection" << std::endl;
-   // for (auto u : units){
-   //    std::cout << u.army_type << " " << u.id << " " << u.units*u.attack << " " << u.initiative << std::endl;
-   // }
-   // std::cout << std::endl;
-
    // vector of already targeted armies
    std::vector<int> taken;
 
@@ -71,16 +65,8 @@ void target_selection(std::vector<army_t> &units){
       // sort eligible targets by damage given -> effective power -> initiative
       std::sort(targets.begin(), targets.end(), target_sort(unit));
 
-      // std::cout << "Targets" << std::endl;
-      // for (auto t : targets){
-      //    std::cout << t.army_type << " " << t.id << ", ";
-      // }
-      // std::cout << std::endl;
-
       // assign target id to unit and add to taken list
-      if (targets.size()==0){
-         unit.target = 0;
-      }
+      if (targets.size()==0){ unit.target = 0; }
       else {
          unit.target = targets.front().id;
          taken.push_back(targets.front().id);
@@ -92,12 +78,6 @@ void attack_phase(std::vector<army_t> &units){
 
    // sort in attack order
    std::sort(units.begin(), units.end(), initiative);
-
-   // std::cout << "Attack phase" << std::endl;
-   // for (auto u : units){
-   //    std::cout << u.army_type << " " << u.id << ", ";
-   // }
-   // std::cout << std::endl;
 
    for (army_t &attacker : units){
 
@@ -119,9 +99,7 @@ void attack_phase(std::vector<army_t> &units){
    // remove any empty units from battle
    for (auto it=units.begin(); it!=units.end();){
 
-      if (it->units <= 0){
-         it = units.erase(it);
-      }
+      if (it->units <= 0){ it = units.erase(it); }
       else { it++; }
    }
 }
@@ -133,13 +111,7 @@ int damage_calc(const army_t &from, const army_t &to){
    const std::vector<std::string> &w  = to.weak;
    const std::string &dt = from.damage_type;
 
-   if (std::find(im.begin(), im.end(), dt) != im.end()){
-      return 0;
-   }
-   else if (std::find(w.begin(), w.end(), dt) != w.end()){
-      return 2*effective_attack;
-   }
-   else {
-      return effective_attack;
-   }
+   if (std::find(im.begin(), im.end(), dt) != im.end()){ return 0; }
+   else if (std::find(w.begin(), w.end(), dt) != w.end()){ return 2*effective_attack; }
+   else { return effective_attack; }
 }
