@@ -36,11 +36,11 @@ void bori(const int &a, const int &b, const int &c, std::vector<int> &reg){
    reg[c] = reg[a] | b;
 }
 
-void setr(const int &a, const int &b, const int &c, std::vector<int> &reg){
+void setr(const int &a, const int&, const int &c, std::vector<int> &reg){
    reg[c] = reg[a];
 }
 
-void seti(const int &a, const int &b, const int &c, std::vector<int> &reg){
+void seti(const int &a, const int&, const int &c, std::vector<int> &reg){
    reg[c] = a;
 }
 

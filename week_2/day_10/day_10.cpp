@@ -13,14 +13,14 @@ int main(){
     std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_10", delimiters));
 
     // save time of closest points
-    int time;
+    int time{0};
 
     // copy of input
     std::vector<std::vector<int>> copy = input;
 
     // smallest bounding box area
     unsigned int smallest_area = INT_MAX; 
-    int s_xmin, s_xmax, s_ymin, s_ymax;
+    int s_xmin{0}, s_xmax{0}, s_ymin{0}, s_ymax{0};
 
     int iter = 20000;
     size_t size = input.size();

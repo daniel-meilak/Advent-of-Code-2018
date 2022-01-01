@@ -59,7 +59,7 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {",","pos=<"," ",">","r="};
-    std::vector<std::vector<long long>> input = input_to_llint_2D(read_input_2D("input_23", delimiters));
+    std::vector<std::vector<long long>> input = input_to_int_2D<long long>(read_input_2D("input_23", delimiters));
 
     std::cout << "Answer (part 1): " << part1(input) << std::endl;
     std::cout << "Answer (part 2): " << part2(input) << std::endl;

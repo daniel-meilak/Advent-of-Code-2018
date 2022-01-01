@@ -45,7 +45,7 @@ int main(){
     bool overlap = false;
 
     // non-overlapping rectangle id
-    int id;
+    int id{0};
 
     // loop through rectangles again to find one which doenst overlap
     for (const auto &line : input){

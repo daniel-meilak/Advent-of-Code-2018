@@ -31,6 +31,22 @@ struct target_sort{
 };
 
 //======================================================================
+// Other functions
+//======================================================================
+
+int damage_calc(const army_t &from, const army_t &to){
+
+   int effective_attack = from.attack*from.units;
+   const std::vector<std::string> &im = to.immune;
+   const std::vector<std::string> &w  = to.weak;
+   const std::string &dt = from.damage_type;
+
+   if (std::find(im.begin(), im.end(), dt) != im.end()){ return 0; }
+   else if (std::find(w.begin(), w.end(), dt) != w.end()){ return 2*effective_attack; }
+   else { return effective_attack; }
+}
+
+//======================================================================
 // Sorting functions
 //======================================================================
 
@@ -130,14 +146,3 @@ void attack_phase(std::vector<army_t> &units){
    }
 }
 
-int damage_calc(const army_t &from, const army_t &to){
-
-   int effective_attack = from.attack*from.units;
-   const std::vector<std::string> &im = to.immune;
-   const std::vector<std::string> &w  = to.weak;
-   const std::string &dt = from.damage_type;
-
-   if (std::find(im.begin(), im.end(), dt) != im.end()){ return 0; }
-   else if (std::find(w.begin(), w.end(), dt) != w.end()){ return 2*effective_attack; }
-   else { return effective_attack; }
-}

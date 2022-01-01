@@ -66,8 +66,8 @@ int main(){
     }
 
     // find the minute a guard was asleep for the longest
-    int highest_minute;
-    int worst_guard;
+    int highest_minute{0};
+    int worst_guard{0};
     time = 0;
     for (const auto &id : guards){
         for (const auto &t : id.second.second){
