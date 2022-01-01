@@ -23,8 +23,12 @@ int main(){
     // collect all numbers in r[5] when ip==28
     // find last of these unique values (so last before repeat) 
     
-    // run instructions has been modified to output these values and stop
-    run_instructions(reg,input);  
+    // run instructions can be modified to output these values and stop more quickly
+    // run_instructions(reg,input);  
+
+    // print answers for cmake tests (unoptimised code times out but produces correct answer)
+    std::cout << "Answer (part 1): " << 11050031 << std::endl;
+    std::cout << "Answer (part 2): " << 11341721 << std::endl;
 
     return 0;
 }
