@@ -13,10 +13,12 @@ int part2(const std::vector<int> &input);
 int main(){
 
     // read input into vector of strings.
-    std::vector<int> input = input_to_int(read_input("input_01", ""));
+    std::vector<std::string> input = read_input("input_01");
+    std::vector<int> in;
+    for (const auto& line : input){ in.push_back(std::stoi(line)); }
 
-    std::cout << "Answer (part 1): " << part1(input) << std::endl;
-    std::cout << "Answer (part 2): " << part2(input) << std::endl;
+    std::cout << "Answer (part 1): " << part1(in) << std::endl;
+    std::cout << "Answer (part 2): " << part2(in) << std::endl;
 
     return 0;
 }
