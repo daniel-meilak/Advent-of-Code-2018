@@ -43,6 +43,12 @@ struct lowest_hp{
 // Operators and Hash functions
 //==============================================================================================
 
+// point sort redefined for reading order
+bool operator< (const point &lhs, const point &rhs){
+   if (lhs.y==rhs.y){ return lhs.x < rhs.x; }
+   else { return lhs.y < rhs.y; }
+}
+
 // unit equality
 bool operator==(const unit &lhs, const unit &rhs);
 
@@ -82,7 +88,7 @@ bool distance_func::operator()(const point &lhs, const point &rhs){
    int d2 = manhattan(rhs,p);
 
    // if distance is equal, choose most north west point
-   if (d1==d2){ return lhs < rhs; }
+   if (d1==d2){ return lhs.y==rhs.y ? lhs.x<rhs.x : lhs.y<rhs.y; }
    else { return d1 < d2; }
 }
 
