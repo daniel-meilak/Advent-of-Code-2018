@@ -57,7 +57,7 @@ int main(){
     const int depth    = input[0][0];
     const int width    = 1000;
     const int target_x = input[1][0];
-    const int target_y = input[0][1];
+    const int target_y = input[1][1];
 
     // grid of cave system
     std::vector<std::vector<char>> caves(depth, std::vector<char>(width,'.'));
