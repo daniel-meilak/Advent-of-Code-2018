@@ -50,10 +50,14 @@ std::vector<point> find_neighbours(const point &p, const std::vector<std::vector
 
 int main(){
 
-    const int depth    = 8112;
+    // read input
+    std::vector<std::string> delimiters = {"depth: ","target: ",","};
+    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_22",delimiters));
+
+    const int depth    = input[0][0];
     const int width    = 1000;
-    const int target_x = 13;
-    const int target_y = 743;
+    const int target_x = input[1][0];
+    const int target_y = input[0][1];
 
     // grid of cave system
     std::vector<std::vector<char>> caves(depth, std::vector<char>(width,'.'));

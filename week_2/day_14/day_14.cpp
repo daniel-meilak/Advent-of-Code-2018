@@ -12,7 +12,7 @@ int part2(const std::string &input);
 
 int main(){
 
-    std::string input = "380621";
+    std::string input = read_line("input_14");
 
     std::cout << "Answer (part 1): " << part1(input) << std::endl;
     std::cout << "Answer (part 2): " << part2(input) << std::endl;

@@ -5,6 +5,8 @@
 #include<cstdlib>
 #include"../../Utils/utils.h"
 
+const int input = std::stoi(read_line("input_11"));
+
 // forward function declarations
 int power(const int &x, const int &y);
 int nth_digit(const int &x,const int &n);
@@ -69,7 +71,7 @@ std::vector<int> region(const int &box_size){
 int power(const int &x, const int &y){
 
     int rack_id = x+10;
-    int power_level = (rack_id*y)+7315;
+    int power_level = (rack_id*y)+input;
     
     power_level *= rack_id;
 

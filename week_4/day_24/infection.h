@@ -1,5 +1,4 @@
-#ifndef INFECTION_H
-#define INFECTION_H
+#pragma once
 
 #include<string>
 #include<vector>
@@ -48,5 +47,3 @@ void target_selection(std::vector<army_t> &units);
 void attack_phase(std::vector<army_t> &units);
 
 int damage_calc(const army_t &from, const army_t &to);
-
-#endif /* INFECTION_H */ 

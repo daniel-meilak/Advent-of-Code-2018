@@ -34,7 +34,7 @@ namespace std {
 int main(){
 
     // read input into vector of strings.
-    std::string input = read_line("input", {});
+    std::string input = read_line("input_20", {});
 
     // map of positions
     std::unordered_map<point,int> grid;

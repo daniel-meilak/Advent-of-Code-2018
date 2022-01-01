@@ -10,7 +10,7 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {","};
-    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input", delimiters));
+    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_25", delimiters));
 
     // constellations list
     std::list<std::vector<std::vector<int>>> cons, copy;

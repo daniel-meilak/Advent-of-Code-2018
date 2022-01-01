@@ -33,7 +33,7 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {"Step "," must be finished before step "," can begin."};
-    std::vector<std::vector<std::string>> input = read_input_2D("input", delimiters);
+    std::vector<std::vector<std::string>> input = read_input_2D("input_07", delimiters);
 
     // map of steps
     std::unordered_map<char, step> steps;

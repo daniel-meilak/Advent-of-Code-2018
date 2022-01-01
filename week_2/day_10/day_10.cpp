@@ -10,7 +10,7 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {"position=<",", ","> velocity=<",">"," "};
-    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input", delimiters));
+    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_10", delimiters));
 
     // save time of closest points
     int time;

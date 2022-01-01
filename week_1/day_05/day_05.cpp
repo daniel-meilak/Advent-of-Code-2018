@@ -13,7 +13,7 @@ int reduce(std::list<char> reaction);
 int main(){
 
     // read input into string.
-    std::string input = read_line("input", {});
+    std::string input = read_line("input_05", {});
 
     // convert input to list of char
     std::list<char> reaction(input.begin(), input.end());

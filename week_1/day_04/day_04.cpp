@@ -11,7 +11,7 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {" ","#","[","]",":"};
-    std::vector<std::vector<std::string>> input = read_input_2D("input", delimiters);
+    std::vector<std::vector<std::string>> input = read_input_2D("input_04", delimiters);
 
     // format is sorted automatically!
     std::sort(input.begin(), input.end());

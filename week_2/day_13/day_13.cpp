@@ -24,7 +24,7 @@ bool sort_by_pos(const cart &lhs, const cart &rhs){
 int main(){
 
     // read input into vector of strings.
-    std::vector<std::string> input = read_input("input", "");
+    std::vector<std::string> input = read_input("input_13", "");
 
     // vector of carts
     std::vector<cart> carts;

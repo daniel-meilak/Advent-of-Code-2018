@@ -13,7 +13,7 @@ std::string difference(const std::string &word1, const std::string &word2);
 int main(){
 
     // read input into vector of strings.
-    std::vector<std::string> input = read_input("input", "");
+    std::vector<std::string> input = read_input("input_02", "");
 
     // tallies of 2 and 3 letter repeats
     int two = 0;

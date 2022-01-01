@@ -11,8 +11,11 @@ long play_marbles(const int &players, const long &marbles);
 
 int main(){
 
-    const long marbles = 72019;
-    const int  players = 458;
+    std::vector<std::string> delimiters = {" players; last marble is worth "," points"};
+    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_09",delimiters));
+
+    const long marbles = input[0][1];
+    const int  players = input[0][0];
 
     std::cout << "Answer (part 1): " << play_marbles(players,marbles) << std::endl;
     std::cout << "Answer (part 2): " << play_marbles(players,marbles*100) << std::endl;

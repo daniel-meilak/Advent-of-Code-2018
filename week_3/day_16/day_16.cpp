@@ -11,8 +11,20 @@ int main(){
 
     // read input into vector of vector of strings.
     std::vector<std::string> delimiters = {"Before:","[","]"," ","After:",","};
-    std::vector<std::vector<int>> samples = input_to_int_2D(read_input_2D("samples", delimiters));
-    std::vector<std::vector<int>> opcode  = input_to_int_2D(read_input_2D("opcode" , delimiters));
+    std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_16", delimiters));
+    std::vector<std::vector<int>> samples, opcode;
+
+    // split into samples and opcode
+    int spaces  = 0;
+    size_t line = 0;
+    while (spaces!=3){
+        if (input[line].empty()){ spaces++; }
+        else                    { spaces=0; }
+
+        samples.push_back(input[line++]);
+    }
+
+    while (line!=input.size()){ opcode.push_back(input[line++]); }
 
     // registers and arguments vector
     std::vector<int> reg, arg; 

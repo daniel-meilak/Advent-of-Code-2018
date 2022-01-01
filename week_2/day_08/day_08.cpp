@@ -20,7 +20,7 @@ int build_tree(std::vector<node> &tree, const std::vector<int> &input, int &pos)
 int main(){
 
     // read input into vector of int.
-    std::vector<int> input = input_to_int(read_input("input", " "));
+    std::vector<int> input = input_to_int(read_input("input_08", " "));
 
     // vector of nodes
     std::vector<node> tree;
