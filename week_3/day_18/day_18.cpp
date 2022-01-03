@@ -12,7 +12,7 @@ void neighbours(int &open, int &tree, int &lumber, const int &x, const int &y, c
 int main(){
 
     // read input into vector of strings.
-    std::vector<std::string> input = read_input("input_18", "");
+    std::vector<std::string> input = read_input("input_18");
 
     size_t height = input.size()+2;
     size_t width  = input[0].size()+2;

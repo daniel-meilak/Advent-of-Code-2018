@@ -14,7 +14,7 @@ int resolve(std::vector<std::string> input, const int elves_attack);
 int main(){
 
     // read input into vector of strings.
-    std::vector<std::string> input = read_input("input_15", "");
+    std::vector<std::string> input = read_input("input_15");
 
     std::cout << "Answer (part 1): " << resolve(input,3) << std::endl;
     std::cout << "Answer (part 2): " << resolve(input,23) << std::endl;
