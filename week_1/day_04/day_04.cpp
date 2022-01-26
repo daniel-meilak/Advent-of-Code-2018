@@ -5,7 +5,7 @@
 #include<cstdlib>
 #include<utility>
 #include<unordered_map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 int main(){
 

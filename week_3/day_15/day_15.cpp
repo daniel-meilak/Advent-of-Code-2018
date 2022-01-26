@@ -6,7 +6,7 @@
 #include<climits>
 #include<ranges> // C++20
 #include"game.h"
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declaration
 int resolve(std::vector<std::string> input, const int elves_attack);

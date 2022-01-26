@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 #include"opcode.h"
 
 int main(){

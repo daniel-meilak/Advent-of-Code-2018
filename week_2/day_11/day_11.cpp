@@ -3,7 +3,7 @@
 #include<string>
 #include<algorithm>
 #include<cstdlib>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 const int input = std::stoi(read_line("input_11"));
 

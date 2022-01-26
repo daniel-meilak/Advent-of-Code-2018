@@ -5,7 +5,7 @@
 #include<cstdlib>
 #include<functional>
 #include"opcode.h"
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declarations
 int run_instructions(std::vector<int> reg, std::vector<std::vector<std::string>> input);

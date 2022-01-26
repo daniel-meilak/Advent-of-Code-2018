@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<unordered_map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declarations
 void count(const std::string &word, int &two, int &three);

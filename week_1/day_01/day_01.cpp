@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<set>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declarations
 int part1(const std::vector<int> &input);

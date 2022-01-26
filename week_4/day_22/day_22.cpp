@@ -6,7 +6,7 @@
 #include<cstdlib>
 #include<utility>
 #include<unordered_map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // point struct, includes tool used on point
 struct point{

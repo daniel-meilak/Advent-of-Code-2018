@@ -4,7 +4,7 @@
 #include<utility>
 #include<algorithm>
 #include<cstdlib>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declarations
 void neighbours(int &open, int &tree, int &lumber, const int &x, const int &y, const std::vector<std::string> &grid);

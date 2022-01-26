@@ -4,7 +4,7 @@
 #include<string>
 #include<algorithm>
 #include<cstdlib>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declarations
 long play_marbles(const int &players, const long &marbles);

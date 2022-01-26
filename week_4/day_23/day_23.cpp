@@ -7,7 +7,7 @@
 #include<cstdlib>
 #include<utility>
 #include<queue>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // function to compare nth element in vec of vec
 struct sort_by_sr{

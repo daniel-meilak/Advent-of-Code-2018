@@ -5,7 +5,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<cctype>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declaration
 int reduce(std::list<char> reaction);

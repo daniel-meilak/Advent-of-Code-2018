@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<unordered_map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // forward function declaration
 int plant_count(const int &generations, std::string plants, const std::string &padding, std::unordered_map<std::string,char> &rules);

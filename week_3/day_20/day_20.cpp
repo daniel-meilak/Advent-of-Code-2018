@@ -5,7 +5,7 @@
 #include<algorithm>
 #include<cstdlib>
 #include<unordered_map>
-#include"../../Utils/utils.h"
+#include"utils.h"
 
 // struct for position
 struct point{
