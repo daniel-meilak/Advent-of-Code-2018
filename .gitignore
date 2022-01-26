@@ -9,4 +9,4 @@ in
 build/*
 out/*
 .vs/*
-CMakeSource.json
+CMakeSettings.json

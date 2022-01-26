@@ -36,7 +36,7 @@ int main(){
     int count = 0;
 
     // work through samples
-    size_t size = samples.size();
+    size_t size = samples.size()-4;
     for (size_t i=0; i<size; i+=4){
 
         // set args from samples

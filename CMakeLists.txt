@@ -4,7 +4,7 @@ project(AOC21 VERSION 1.0)
 
 # compiler arguments
 if (MSVC)
-   add_compile_options(/Wall)
+   add_compile_options()
 else()
    add_compile_options(-Wall -Werror -Wextra -pedantic)
 endif()
