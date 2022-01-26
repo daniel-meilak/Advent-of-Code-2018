@@ -7,14 +7,14 @@
 #include"utils.h"
 
 // forward function declarations
-long play_marbles(const int &players, const long &marbles);
+long long play_marbles(const int &players, const long long &marbles);
 
 int main(){
 
     std::vector<std::string> delimiters = {" players; last marble is worth "," points"};
     std::vector<std::vector<int>> input = input_to_int_2D(read_input_2D("input_09",delimiters));
 
-    const long marbles = input[0][1];
+    const long long marbles = input[0][1];
     const int  players = input[0][0];
 
     std::cout << "Answer (part 1): " << play_marbles(players,marbles) << std::endl;
@@ -23,19 +23,19 @@ int main(){
     return 0;
 }
 
-long play_marbles(const int &players, const long &marbles){
+long long play_marbles(const int &players, const long long &marbles){
     
     // start with marble zero
-    std::list<long> circle = {0};
+    std::list<long long> circle = {0};
 
     // iterator to current (start at 0)
     auto it = circle.begin();
 
     // vector of players points
-    std::vector<long> points(players,0);
+    std::vector<long long> points(players,0);
 
     // add marbles to circle
-    for (long i=1; i<=marbles; i++){
+    for (long long i=1; i<=marbles; i++){
 
         if (i % 23 == 0){
             // add next marbe to points
